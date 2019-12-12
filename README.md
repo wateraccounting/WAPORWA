@@ -5,7 +5,7 @@ Authors:
 - Bich Tran (b.tran@un-ihe.org)
 - Solomon Seyoum 
 - Claire Michailovsky 
-- Bert Coever 
+- Bert Coerver 
 
 With contributions from:
 
@@ -46,8 +46,8 @@ For more recent softwares developed by Water Accounting group at IHE-DELFT Insti
 ![](./img/README/2_workflow.png)
 
 **Example notebooks**: Sample Case Study - Litani River Basin
-- Run analysis: notebook
-- Visualize results: notebook
+- Run analysis: To-be-updated link
+- Visualize results: To-be-updated link
 
 #### 2.2.2. Pre-processing modules
 
@@ -116,7 +116,7 @@ Test dataset for Litani case: (to be uploaded)
 
 ![](./img/OUTPUTS/1_sheet1sample.png)
 
-**See Sheet 1 documentation**: To be updated (Wiki link)
+**See WA+ Sheet 1 documentation**: To be updated (Wiki link)
 
 #### 2.4.3. Water Accounting maps and charts
 
