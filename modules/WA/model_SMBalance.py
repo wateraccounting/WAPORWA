@@ -11,25 +11,18 @@ import xarray as xr
 #import glob
 #import datetime
 import warnings
-import time
 
 
-#%%
-import os
-import numpy as np
-import gdal
-import xarray as xr
-import time
-
-#%%
+#%% Functions
 def open_nc(nc,timechunk=1,chunksize=1000):
     dts=xr.open_dataset(nc)
     key=list(dts.keys())[0]
     var=dts[key].chunk({"time": timechunk, "latitude": chunksize, "longitude": chunksize}) #.ffill("time")
     return var,key
 
-def SCS_calc_SRO(P,I,NRD,SMmax,SM, cf):    
-    SRO = ((((P-I)/NRD)**2)/((P-I)/NRD+cf*(SMmax-SM))).where(P-I>0,P*0)
+def SCS_calc_SRO(P,I,NRD,SMmax,SM, cf): 
+
+    SRO = ((((P-I)/NRD)**2)/((P-I)/NRD+cf*(SMmax-SM))).where((P-I)>0,P*0)
     return SRO*NRD
 
 def get_rootdepth(version = '1.0'):
@@ -195,10 +188,9 @@ def OpenAsArray(fh, bandnumber = 1, dtype = 'float32', nan_values = False):
     Array = Array.astype(np.float32)
     return Array
 
-
 #%% main
 def run_SMBalance(MAIN_FOLDER,p_in,e_in,i_in,rd_in,lu_in,smsat_file,
-         start_year=2009,f_perc=1,f_Smax=0.9, cf =  20,
+        f_perc=1,f_Smax=0.9, cf =  20,
          chunks=[1,1000,1000]):
     '''
     Arguments:
@@ -226,21 +218,14 @@ def run_SMBalance(MAIN_FOLDER,p_in,e_in,i_in,rd_in,lu_in,smsat_file,
 
     tchunk=chunks[0]
     chunk=chunks[1]
-    Pt,key=open_nc(p_in,timechunk=tchunk,chunksize=chunk)
-    E,key=open_nc(e_in,timechunk=tchunk,chunksize=chunk)
-    Int,key=open_nc(i_in,timechunk=tchunk,chunksize=chunk)
-    nRD,key=open_nc(rd_in,timechunk=tchunk,chunksize=chunk)
-    LU,key=open_nc(lu_in,timechunk=tchunk,chunksize=chunk)
-#    thetasat=xr.open_dataset(thetasat_in).thetasat.chunk({'latitude':chunk,'longitude':chunk})
-    ### Get thetasat DataArray from tiff
-    thetasat_data=OpenAsArray(smsat_file,nan_values=True)
-    thetasat=xr.DataArray(thetasat_data, coords = {"latitude": Pt.latitude,
-                                                    "longitude":Pt.longitude}, 
-                           dims = ["latitude", "longitude"])
-    thetasat=thetasat.chunk({"latitude": chunk, "longitude": chunk}) #.ffill("time")
     
-    # del thetasat_data
-    
+    Pt,_=open_nc(p_in,timechunk=tchunk,chunksize=chunk)
+    E,_=open_nc(e_in,timechunk=tchunk,chunksize=chunk)
+    Int,_=open_nc(i_in,timechunk=tchunk,chunksize=chunk)
+    nRD,_=open_nc(rd_in,timechunk=tchunk,chunksize=chunk)
+    LU,_=open_nc(lu_in,timechunk=tchunk,chunksize=chunk)
+    thetasat,_=open_nc(smsat_file,timechunk=tchunk,chunksize=chunk)
+ 
     ### convert nRD = 0 to 1
     nRD = nRD.where(nRD!=0,1)
     
@@ -254,10 +239,10 @@ def run_SMBalance(MAIN_FOLDER,p_in,e_in,i_in,rd_in,lu_in,smsat_file,
         lu = LU.isel(time=j)
         
         #mask lu for water bodies
-        mask = xr.where(((lu==80) | (lu==81) | (lu==70) | (lu==200)), 1,np.nan)
-        
+        mask = xr.where(((lu==80) | (lu==81) | (lu==70) | (lu==200)|(lu==90)), 1,0)
+        #include flooded shrub?
         Rd = root_dpeth(lu)
-        SMmax=thetasat*Rd    
+        SMmax=thetasat[0]*Rd    
         f_consumed = Consumed_fraction(lu)    
         for t in range(t1,t2):
             print('time: ', t)
@@ -268,34 +253,37 @@ def run_SMBalance(MAIN_FOLDER,p_in,e_in,i_in,rd_in,lu_in,smsat_file,
             NRD = nRD.isel(time=t)
             
             ### calculate surface runoff  as a function of SMt_1
+            SMt_1=SMt_1.where(SMt_1<SMmax, SMmax)
             SRO=SCS_calc_SRO(P,I,NRD,SMmax,SMt_1,cf)        
              
             ### calculate Percolation as a function of SMt_1
             perc=(SMt_1*(xr.ufuncs.exp(-f_perc/SMt_1))).where(SMt_1>f_Smax*SMmax,P*0)
+            
+    
+    #        maskerror = xr.where(((I.notnull()) & (P.isnull())), 1,np.nan)
                     
             ### Calculate SM temp
-            Stemp = SMt_1+(P-I)-(ETa-I)-SRO-perc
-            
+            Stemp = SMt_1+(P-I)-(ETa-I)-SRO-perc #???
+    #         Stemp = SMt_1+P-ETa-SRO-perc ##why not this??
             
             ### Calculate ETincr, ETrain, Qsupply, and update SM
             ETincr = (P*0).where(Stemp>=0, -1*Stemp)
            
             # adjust ETincr for water bodies
-            ETincr = (P*0).where(((mask==1) & (P-ETa >= 0)), 
-                      (ETa-P).where(((mask==1) & (P-ETa <0)), ETincr))
+            ETincr = (P*0).where(((mask==1) & (P-ETa >= 0)),(ETa-P).where(((mask==1) & (P-ETa <0)), ETincr))
             
             ETrain = ETa.where(Stemp>=0,ETa-ETincr)
             Qsupply = (P*0).where(Stemp>=0,ETincr/f_consumed)
             SM = Stemp.where(Stemp>=0,Stemp+Qsupply)
-            
+    #        SM = SM.where(SM>=0,P*0)
             ### Calculate increametal percolation and increamental runoff
             perc_incr = (SM-SMmax)*perc/(perc+SRO).where(SM>SMmax, P*0)
             SROincr = (SM-SMmax-perc_incr).where(SM>SMmax, P*0)
-    #        overflow = SM-SMmax # we don't use overflow at 
+    #        overflow = SM-SMmax # we don't use overflow at the moment
             SM=SM.where(SM<SMmax, SMmax)
     #        SRO=SRO+overflow.where(overflow>0, SRO)
           
-    
+            
     
             if t == 0:
                 etb = ETincr
@@ -303,38 +291,58 @@ def run_SMBalance(MAIN_FOLDER,p_in,e_in,i_in,rd_in,lu_in,smsat_file,
             else:
                 etb = xr.concat([etb, ETincr], dim='time')  
                 etg = xr.concat([etg, ETrain], dim='time')
-            attrs={"units":"mm/month", "source": "FAO WaPOR", "quantity":"Rainfall_ET_M"}
-            etg.attrs=attrs
-            etg.name = 'Rainfall_ET_M'
+            
+            del ETincr
+            del ETrain
+            
+            del Stemp
+            del perc_incr
+            del SROincr
+            del perc
+            del Qsupply 
+            
+            del P
+            del ETa
+            del I
+            del NRD
+            del SMt_1 
     
-            attrs={"units":"mm/month", "source": "FAO WaPOR", "quantity":"Increamental_ET_M"}
-            etb.attrs=attrs
-            etb.name = 'Increamental_ET_M'
     
-            ###
-#            timechunk = 1
-#            chunks = [timechunk,latchunk, lonchunk]
-            comp = dict(zlib=True, complevel=9, least_significant_digit=2, chunksizes=chunks)
+    del Pt
+    del E
+    del Int
+    del nRD
+    del LU
+    del thetasat
+    del SM
+    del SMmax
+    del f_consumed
+    del mask
     
+    attrs={"units":"mm/month", "source": "FAO WaPOR", "quantity":"Rainfall_ET_M"}
+    etg.attrs=attrs
+    etg.name = 'Rainfall_ET_M'
     
-            ##green ET 
-            print("\n\nwriting the ET_rain netcdf file\n\n")
+    attrs={"units":"mm/month", "source": "FAO WaPOR", "quantity":"Incremental_ET_M"}
+    etb.attrs=attrs
+    etb.name = 'Incremental_ET_M'
 
-            nc_fn=r'etrain_monthly.nc'
-            etg_path=os.path.join(MAIN_FOLDER,nc_fn)
-            encoding = {"Rainfall_ET_M": comp}
-            etg.to_netcdf(etg_path,encoding=encoding)    
-
-            del etg
-            #
-            ###Blue ET datase
-            print("\n\nwriting the ET_increamental netcdf file\n\n")
-            nc_fn=r'etincr_monthly.nc'
-            etb_path=os.path.join(MAIN_FOLDER,nc_fn)
-            encoding = {"Increamental_ET_M": comp}
-            etb.to_netcdf(etb_path,encoding=encoding)
+    ### Write netCDF files
+    comp = dict(zlib=True, complevel=9, least_significant_digit=2, chunksizes=chunks)
+    print("\n\nwriting the ET_incremental netcdf file\n\n")
+    etincr_path=os.path.join(MAIN_FOLDER,'etincr_monthly.nc')
+    encoding = {"Incremental_ET_M": comp}
+    etb.to_netcdf(etincr_path,encoding=encoding)
+    del etb
     
-            del etb
-            return (etg_path,etb_path)
+    ##green ET 
+    print("\n\nwriting the ET_rain netcdf file\n\n")
+    etrain_path=os.path.join(MAIN_FOLDER,'etrain_monthly.nc')
+    encoding = {"Rainfall_ET_M": comp}
+    etg.to_netcdf(etrain_path,encoding=encoding)
+    
+    del etg
+
+    return (etrain_path,etincr_path)
         
         

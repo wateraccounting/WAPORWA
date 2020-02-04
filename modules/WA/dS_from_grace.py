@@ -174,4 +174,5 @@ def main(BASIN_SHP,MASCON_DATA_FOLDER,OUT_CSV,BUFFER_DIST=.71):
         spamwriter.writerow(['date', 'Equivalent Water Height [mm]'])
         for date, value in zip(mascon_dates, weighted_average):
             spamwriter.writerow([date, value*10])
+    return True
 

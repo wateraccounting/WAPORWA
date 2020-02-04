@@ -59,7 +59,7 @@ def Reclass_LCC_to_LUWA(WaPOR_LCC,Output_dir,ProtectedArea_tif,
         LCC_LUWA_dict={
                 'PLU':(1,[]),
                'ULU':(2,[]),
-               'MLU':(3,[41,42]),#Rainfed crop
+               'MLU':(3,[41,43]),#Rainfed crop
                'MWU':(4,[42,50]), #irrigated crop and built-up
                } 
     driver,NDV,xsize,ysize,GeoT,Projection=gis.GetGeoInfo(WaPOR_LCC)
