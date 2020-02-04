@@ -5,8 +5,9 @@ ftp://ftp.wateraccounting.unesco-ihe.org/WaterAccounting_Guest/Github_data/WAPOR
 - Username: wateraccountingguest
 - Password: W@t3r@ccounting
 
-# This dataset includes data for the Litani basin case:
+# This dataset includes example data for the Litani basin case:
 
-- Sample input data downloaded using WaPOR module
-- Sample netCDF files generated using WA module
-- Sample output of WA module
+- Input data downloaded using WaPOR module
+- Input time-series data: river discharge, interbasin transfer abstraction
+- netCDF files generated using WA module
+- Output of WA module
