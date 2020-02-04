@@ -46,8 +46,7 @@ For more recent softwares developed by Water Accounting group at IHE-DELFT Insti
 ![](./img/README/2_workflow.png)
 
 **Example notebooks**: Sample Case Study - Litani River Basin
-- Run analysis: To-be-updated link
-- Visualize results: To-be-updated link
+https://github.com/trngbich/WAPORWA/tree/master/notebooks
 
 #### 2.2.2. Pre-processing modules
 
@@ -93,7 +92,7 @@ For more recent softwares developed by Water Accounting group at IHE-DELFT Insti
 
 #### 2.3.3. Test dataset
 
-Test dataset for Litani case: (to be uploaded)
+Test dataset for Litani case: https://github.com/trngbich/WAPORWA/blob/master/data/Download_Litani_test_case.md
 
 ### 2.4. Outputs
 
