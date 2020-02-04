@@ -1,4 +1,4 @@
-# Global Input data can be downloaded from
+# Litani Test Case data can be downloaded from
 
 ftp://ftp.wateraccounting.unesco-ihe.org/WaterAccounting_Guest/Github_data/WAPORWA/Litani.rar
 
