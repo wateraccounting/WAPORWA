@@ -38,30 +38,63 @@ For more recent softwares developed by Water Accounting group at IHE-DELFT Insti
 
 ## 2. Description
 
-### 2.1. Python requirements
+### 2.1. Python environment
+
+python 3.7
+
+numpy 1.16.2
+
+pandas 0.24.2
+
+xarray 0.13.2 (dask 1.1.4)
+
+GDAL 3.0.1
+
+netCDF4 1.5.1.2
+
+shapely 1.7a2
+
+geopy 1.20.0
+
+pyshp 2.1.0
+
+pyproj 2.2.2
+
+requests 2.21.0
+
+json 2.0.9
 
 ### 2.2. Modules
 
 #### 2.2.1. Workflow and notebooks
 ![](./img/README/2_workflow.png)
 
-**Example notebooks**: Sample Case Study - Litani River Basin
-https://github.com/trngbich/WAPORWA/tree/master/notebooks
+**Example notebooks**: 
+[Sample Case Study - Litani River Basin](./notebooks/)
 
 #### 2.2.2. Pre-processing modules
+
+[**:notebook: Notebook** Collect and Prepare data](./notebooks/0_Collect_Prepare_data.ipynb)
 
 - Create Landuse categories reclassification maps from WaPOR Landcover maps and other global maps
 - Create Rootdepth map from WaPOR Landcover map and lookup table
 - Calculate monthly number of rainy days from daily precipitation layers
 - Calculate monthly data layers from dekadal ones
-- Create input netCDF files
+
+[**:notebook: Notebook** Create input netCDF files](./notebooks/1_Create_NetCDF.ipynb)
 
 #### 2.2.3. Monthly Pixel-based Soil Moisture Balance module 
 ![](./img/README/3_pixelbased.png)
 
-**See Model documentation**: https://github.com/trngbich/WAPORWA/wiki/Monthly-Pixel-based-Soil-Moisture-Balance
+[**:notebook: Notebook** Run model](./notebooks/3_RunSMBalance.ipynb)
+
+[**See Model Documentation**](https://github.com/trngbich/WAPORWA/wiki/Monthly-Pixel-based-Soil-Moisture-Balance)
 
 #### 2.2.4. Basin fluxes calculation module
+
+[**:notebook: Notebook** Calculate Basin Total Water Storage Change from GRACE](./notebooks/2_GRACE_dS.ipynb)
+
+[**:notebook: Notebook** Calculate Sheet 1 fluxes](./notebooks/4_calc_Sheet1_fluxes.ipynb)
 
 ### 2.3. Inputs
 
@@ -76,7 +109,7 @@ https://github.com/trngbich/WAPORWA/tree/master/notebooks
 | Land Cover Classification     | Yearly, 100m      |   L2_LCC_A |
 | Reference Evapotranspiration      | Monthly, 20km      |   L2_RET_M |
 
-#### 2.3.2. Other data
+#### 2.3.2. Other Global data
 
 | Data layers       | Resolution           | Sources  |
 | ------------- |:-------------:| -----:|
@@ -90,9 +123,11 @@ https://github.com/trngbich/WAPORWA/tree/master/notebooks
 | Total Water Storage Change | Monthly, mascon | GRACE-GFCS |
 | Observed flows      | Monthly, point | GRDC (unless mentioned otherwise) |
 
+Global input dataset: [Download data](./data/Download_global_input_data.md)
+
 #### 2.3.3. Test dataset
 
-Test dataset for Litani case: https://github.com/trngbich/WAPORWA/blob/master/data/Download_Litani_test_case.md
+Test dataset for Litani case: [Download data](./data/Download_Litani_test_case.md)
 
 ### 2.4. Outputs
 
@@ -115,7 +150,7 @@ Test dataset for Litani case: https://github.com/trngbich/WAPORWA/blob/master/da
 
 ![](./img/wiki/sheet1/sheet1_template.png)
 
-**See WA+ Sheet 1 documentation**: https://github.com/trngbich/WAPORWA/wiki/Water-Accounting-Plus-(WA-)---Sheet-1:-Resource-Base
+[**See WA+ Sheet 1 documentation**](https://github.com/trngbich/WAPORWA/wiki/Water-Accounting-Plus-(WA-)---Sheet-1:-Resource-Base)
 
 #### 2.4.3. Water Accounting maps and charts
 
