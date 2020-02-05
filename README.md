@@ -46,8 +46,7 @@ For more recent softwares developed by Water Accounting group at IHE-DELFT Insti
 ![](./img/README/2_workflow.png)
 
 **Example notebooks**: Sample Case Study - Litani River Basin
-- Run analysis: To-be-updated link
-- Visualize results: To-be-updated link
+https://github.com/trngbich/WAPORWA/tree/master/notebooks
 
 #### 2.2.2. Pre-processing modules
 
@@ -60,7 +59,7 @@ For more recent softwares developed by Water Accounting group at IHE-DELFT Insti
 #### 2.2.3. Monthly Pixel-based Soil Moisture Balance module 
 ![](./img/README/3_pixelbased.png)
 
-**See Model documentation**: To be updated (Wiki link)
+**See Model documentation**: https://github.com/trngbich/WAPORWA/wiki/Monthly-Pixel-based-Soil-Moisture-Balance
 
 #### 2.2.4. Basin fluxes calculation module
 
@@ -93,7 +92,7 @@ For more recent softwares developed by Water Accounting group at IHE-DELFT Insti
 
 #### 2.3.3. Test dataset
 
-Test dataset for Litani case: (to be uploaded)
+Test dataset for Litani case: https://github.com/trngbich/WAPORWA/blob/master/data/Download_Litani_test_case.md
 
 ### 2.4. Outputs
 
@@ -114,20 +113,10 @@ Test dataset for Litani case: (to be uploaded)
 
 #### 2.4.2. Water Accounting Sheet 1: Resource Base
 
-![](./img/OUTPUTS/1_sheet1sample.png)
+![](./img/wiki/sheet1/sheet1_template.png)
 
-**See WA+ Sheet 1 documentation**: To be updated (Wiki link)
+**See WA+ Sheet 1 documentation**: https://github.com/trngbich/WAPORWA/wiki/Water-Accounting-Plus-(WA-)---Sheet-1:-Resource-Base
 
 #### 2.4.3. Water Accounting maps and charts
 
-![](./img/OUTPUTS/2_P-ETpies.png)
-
-![](./img/OUTPUTS/3_ETsplitperLCC.png)
-
-![](./img/OUTPUTS/4_yearlyfluxes.png)
-
-![](./img/OUTPUTS/5_yearlyET.png)
-
-![](./img/OUTPUTS/6_averagemap.png)
-
-![](./img/OUTPUTS/7_yearlymap.png)
+![](./img/README/4_graphs.png)
