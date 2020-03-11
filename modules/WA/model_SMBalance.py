@@ -26,7 +26,10 @@ def SCS_calc_SRO(P,I,NRD,SMmax,SM, cf):
     return SRO*NRD
 
 def get_rootdepth(version = '1.0'):
-    
+    '''
+    Roothdepth dictionary, use only for WAPOR Land Cover Map
+    for other land cover map, change dictionary
+    '''
     lcc_code = dict()
     lcc_code['1.0'] = {
        'Shrubland':20,
@@ -88,7 +91,7 @@ def get_rootdepth(version = '1.0'):
     return lcc_code[version], root_depth[version]
 
 
-def root_dpeth(lu):
+def root_depth(lu):
     rootdepth=lu.copy()
     rootdepth.name='Root depth'
     rootdepth.attrs={'units':'mm',
@@ -189,7 +192,7 @@ def OpenAsArray(fh, bandnumber = 1, dtype = 'float32', nan_values = False):
     return Array
 
 #%% main
-def run_SMBalance(MAIN_FOLDER,p_in,e_in,i_in,rd_in,lu_in,smsat_file,
+def run_SMBalance(MAIN_FOLDER,p_in,e_in,i_in,nrd_in,lu_in,smsat_file,
         f_perc=1,f_Smax=0.9, cf =  20,
          chunks=[1,1000,1000]):
     '''
@@ -197,13 +200,13 @@ def run_SMBalance(MAIN_FOLDER,p_in,e_in,i_in,rd_in,lu_in,smsat_file,
         
     ## required   
     MAIN_FOLDER='$PATH/nc/'
-    p_in = '$PATH/p_monthly.nc'
-    e_in = '$PATH/e_monthly.nc'
-    i_in = '$PATH/i_monthly.nc'
-    rd_in = '$PATH/nRD_monthly.nc'
-    lu_in = '$PATH/lcc_yearly.nc'
-    smsat_file = '$PATH/p_monthly.nc'
-    start_year=2009
+    p_in = '$PATH/p_monthly.nc' # Monthly Precipitation
+    e_in = '$PATH/e_monthly.nc' # Monthly Actual Evapotranspiration
+    i_in = '$PATH/i_monthly.nc' # Monthly Interception
+    rd_in = '$PATH/nRD_monthly.nc' # Monthly Number of Rainy days
+    lu_in = '$PATH/lcc_yearly.nc' # Yearly WaPOR Land Cover Map
+    smsat_file = '$PATH/thetasat.nc' #Saturated Water Content (%)
+    start_year=2009 
     
     #default
     f_perc=1 # percolation factor
@@ -222,7 +225,7 @@ def run_SMBalance(MAIN_FOLDER,p_in,e_in,i_in,rd_in,lu_in,smsat_file,
     Pt,_=open_nc(p_in,timechunk=tchunk,chunksize=chunk)
     E,_=open_nc(e_in,timechunk=tchunk,chunksize=chunk)
     Int,_=open_nc(i_in,timechunk=tchunk,chunksize=chunk)
-    nRD,_=open_nc(rd_in,timechunk=tchunk,chunksize=chunk)
+    nRD,_=open_nc(nrd_in,timechunk=tchunk,chunksize=chunk)
     LU,_=open_nc(lu_in,timechunk=tchunk,chunksize=chunk)
     thetasat,_=open_nc(smsat_file,timechunk=tchunk,chunksize=chunk)
  
@@ -241,7 +244,7 @@ def run_SMBalance(MAIN_FOLDER,p_in,e_in,i_in,rd_in,lu_in,smsat_file,
         #mask lu for water bodies
         mask = xr.where(((lu==80) | (lu==81) | (lu==70) | (lu==200)|(lu==90)), 1,0)
         #include flooded shrub?
-        Rd = root_dpeth(lu)
+        Rd = root_depth(lu)
         SMmax=thetasat[0]*Rd    
         f_consumed = Consumed_fraction(lu)    
         for t in range(t1,t2):
