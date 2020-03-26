@@ -51,7 +51,7 @@ def main(Dir, Startdate='2009-01-01', Enddate='2018-12-31',
         print('ERROR: cannot get list of available data')
         return None
     if Waitbar == 1:
-        import watools.Functions.Start.WaitbarConsole as WaitbarConsole
+        import WaPOR.WaitbarConsole as WaitbarConsole
         total_amount = len(df_avail)
         amount = 0
         WaitbarConsole.printWaitBar(amount, total_amount, prefix = 'Progress:', suffix = 'Complete', length = 50)
