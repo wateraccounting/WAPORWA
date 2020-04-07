@@ -310,6 +310,12 @@ def run_SMBalance(MAIN_FOLDER,p_in,e_in,i_in,nrd_in,lu_in,smsat_file,
             del NRD
             del SMt_1 
     
+     # force time of output DataArray equal to input time dimension
+    etb['time']=E['time']
+    etg['time']=E['time']
+    #change coordinates order to [time,latitude,longitude]
+    etb=etb.transpose('time','latitude','longitude')
+    etg=etg.transpose('time','latitude','longitude')
     
     del Pt
     del E

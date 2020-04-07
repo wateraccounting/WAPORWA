@@ -20,18 +20,20 @@ WaPOR.AETI_monthly(Dir='C:/Temp/', Startdate='2009-02-24', Enddate='2009-03-09',
 from .PCP_monthly import main as PCP_monthly
 from .PCP_yearly import main as PCP_yearly
 from .PCP_daily import main as PCP_daily
+from .PCP_dekadal import main as PCP_dekadal
 from .RET_monthly import main as RET_monthly
 from .RET_yearly import main as RET_yearly
 from .AET_yearly import main as AET_yearly
 from .AET_monthly import main as AET_monthly
+from .AET_dekadal import main as AET_dekadal
 from .I_yearly import main as I_yearly
 from .I_dekadal import main as I_dekadal
 from .LCC_yearly import main as LCC_yearly
 from .WaporAPI import __WaPOR_API_class
 
-__all__ = ['PCP_monthly','PCP_yearly','PCP_daily',
+__all__ = ['PCP_monthly','PCP_yearly','PCP_daily','PCP_dekadal',
            'RET_monthly','RET_yearly',
-           'AET_monthly','AET_yearly',
+           'AET_monthly','AET_yearly','AET_dekadal',
            'I_yearly','LCC_yearly','I_dekadal']
 __doc__ = """module for FAO WAPOR API"""
 __version__ = '0.1'
