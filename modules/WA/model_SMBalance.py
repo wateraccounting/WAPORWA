@@ -17,7 +17,10 @@ import warnings
 def open_nc(nc,timechunk=1,chunksize=1000):
     dts=xr.open_dataset(nc)
     key=list(dts.keys())[0]
-    var=dts[key].chunk({"time": timechunk, "latitude": chunksize, "longitude": chunksize}) #.ffill("time")
+    if 'time' in list(dts.dims.keys()):
+        var=dts[key].chunk({"time": timechunk, "latitude": chunksize, "longitude": chunksize}) #.ffill("time")
+    else:
+        var=dts[key].chunk({"latitude": chunksize, "longitude": chunksize}) #.ffill("time")        
     return var,key
 
 def SCS_calc_SRO(P,I,NRD,SMmax,SM, cf): 
@@ -245,7 +248,7 @@ def run_SMBalance(MAIN_FOLDER,p_in,e_in,i_in,nrd_in,lu_in,smsat_file,
         mask = xr.where(((lu==80) | (lu==81) | (lu==70) | (lu==200)|(lu==90)), 1,0)
         #include flooded shrub?
         Rd = root_depth(lu)
-        SMmax=thetasat[0]*Rd    
+        SMmax=thetasat*Rd    
         f_consumed = Consumed_fraction(lu)    
         for t in range(t1,t2):
             print('time: ', t)

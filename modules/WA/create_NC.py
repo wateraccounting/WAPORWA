@@ -43,10 +43,15 @@ def main(nc_fn,basin,dataset,template,cutline,step='month',**kwargs):
     DTindex: object
         pandas DatetimeIndex range
     '''
-    dims = {'time':  None, 'latitude': None, 'longitude': None}
-    dims['latitude'], dims['longitude'], optionsProj, optionsClip = _get_lats_lons(template, cutline)
-    _init_nc(nc_fn, dims, dataset, attr = {"basin_name" : basin})
+   
     overview=_make_overview(dataset, step)
+    if "invariant" in overview.keys():
+        dims = {'latitude': None, 'longitude': None}
+    else:
+        dims = {'time':  None, 'latitude': None, 'longitude': None}
+ 
+    dims['latitude'], dims['longitude'], optionsProj, optionsClip = _get_lats_lons(template, cutline)    
+    _init_nc(nc_fn, dims, dataset, attr = {"basin_name" : basin})
     succes = _fill_data_to_nc(nc_fn, overview, optionsProj, optionsClip, cutline)
     return succes
 
@@ -156,7 +161,9 @@ def _fill_data_to_nc(nc_file, overview, optionsProj, optionsClip, shape):
             sourceds = None
             os.remove(temp_file)
             os.remove(temp_fileP)
-        __fill_nc_one_timestep(nc_file, var, shape)
+            print(var)
+            print(shape)
+        __fill_nc_one_timestep(nc_file, var, shape,time_val = None)
     
     # Save time-variant data to nc-file.
     for date in tqdm(overview.keys()):
@@ -292,7 +299,9 @@ def __fill_nc_one_timestep(nc_file, var, shape, time_val = None):
     # Add invariant data to nc-file.
     else:
         for name, data in var.items():
-            out_nc.variables[name][...] = data
+            print(name)
+            print(data.shape)
+            out_nc.variables[name][0::] = data
     
     # Close nc-file.
     out_nc.close()
