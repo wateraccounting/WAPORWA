@@ -40,4 +40,5 @@ __version__ = '0.1'
 
 # initiate class for .his-files
 API = __WaPOR_API_class()
-API.Token='0dad0f82515fc8815c00451ea069030cfca228b6f2fbdff01b5722a03a033457ef8a0f5b6308ef62'
+
+API.Token=input('Your WaPOR API Token: ')
