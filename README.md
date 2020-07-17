@@ -40,29 +40,38 @@ For more recent softwares developed by Water Accounting group at IHE-DELFT Insti
 
 ### 2.1. Python environment
 
-python 3.7
+- python 3.7
+- conda 4.8.3
+- numpy 1.16.2
+- pandas 0.24.2
+- xarray 0.13.2 (dask 1.1.4)
+- GDAL 3.0.1
+- netCDF4 1.5.1.2
+- shapely 1.7a2
+- geopy 1.20.0
+- pyshp 2.1.0
+- pyproj 2.2.2
+- requests 2.21.0
+- json 2.0.9
 
-numpy 1.16.2
+#### Recommended steps to set up python environment
 
-pandas 0.24.2
+**Create new environment**
 
-xarray 0.13.2 (dask 1.1.4)
+	>>> conda create --name waporwa python=3.7
 
-GDAL 3.0.1
+**Change to folder contain requirements.txt file**
 
-netCDF4 1.5.1.2
+	>>> D:
+	>>> cd Github/WAPORWA
 
-shapely 1.7a2
+**Install requirements**
 
-geopy 1.20.0
+	>>> conda install --force-reinstall -y --name waporwa -c conda-forge --file requirements.txt
 
-pyshp 2.1.0
+**Activate environment**
 
-pyproj 2.2.2
-
-requests 2.21.0
-
-json 2.0.9
+	>>> conda activate waporwa
 
 ### 2.2. Modules
 
