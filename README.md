@@ -1,4 +1,4 @@
-[![DOI](https://zenodo.org/badge/227573099.svg)](https://zenodo.org/badge/latestdoi/227573099)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3980562.svg)](https://doi.org/10.5281/zenodo.3980562)
 
 # WaPOR-based Water Accounting 
 ![](./img/README/1_banner.jpg)
