@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/227573099.svg)](https://zenodo.org/badge/latestdoi/227573099)
+
 # WaPOR-based Water Accounting 
 ![](./img/README/1_banner.jpg)
 
