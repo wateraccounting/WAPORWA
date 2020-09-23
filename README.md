@@ -57,7 +57,7 @@ For more recent softwares developed by Water Accounting group at IHE-DELFT Insti
   - xarray=0.16.*  
   - geopy==2.0.*
 
-#### Recommended steps to set up python environment
+#### Recommended steps to set up python environment in Anaconda prompt
 
 
 **Change to folder contain environment.yml file**
@@ -65,7 +65,7 @@ For more recent softwares developed by Water Accounting group at IHE-DELFT Insti
 	>>> D:
 	>>> cd Github/WAPORWA
 
-**Create environment from environmeny.yml file**
+**Create environment from environment.yml file**
 
 	>>> conda create env
 
