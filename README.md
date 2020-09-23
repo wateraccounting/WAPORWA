@@ -42,34 +42,32 @@ For more recent softwares developed by Water Accounting group at IHE-DELFT Insti
 
 ### 2.1. Python environment
 
-- python 3.7
-- conda 4.8.3
-- numpy 1.16.2
-- pandas 0.24.2
-- xarray 0.13.2 (dask 1.1.4)
-- GDAL 3.0.1
-- netCDF4 1.5.1.2
-- shapely 1.7a2
-- geopy 1.20.0
-- pyshp 2.1.0
-- pyproj 2.2.2
-- requests 2.21.0
-- json 2.0.9
+  - dask=2.27.* 
+  - gdal=2.3.*
+  - matplotlib=3.3.* 
+  - netcdf4=1.4.*
+  - notebook=6.1.1=py37_0
+  - numpy=1.19.* 
+  - pandas=1.1.* 
+  - pip=20.1.1=py37_1
+  - pyshp=2.1.* 
+  - python=3.7.*
+  - shapely=1.6.* 
+  - tqdm=4.49.* 
+  - xarray=0.16.*  
+  - geopy==2.0.*
 
 #### Recommended steps to set up python environment
 
-**Create new environment**
 
-	>>> conda create --name waporwa python=3.7
-
-**Change to folder contain requirements.txt file**
+**Change to folder contain environment.yml file**
 
 	>>> D:
 	>>> cd Github/WAPORWA
 
-**Install requirements**
+**Create environment from environmeny.yml file**
 
-	>>> conda install --force-reinstall -y --name waporwa -c conda-forge --file requirements.txt
+	>>> conda create env
 
 **Activate environment**
 
@@ -120,7 +118,7 @@ For more recent softwares developed by Water Accounting group at IHE-DELFT Insti
 | Land Cover Classification     | Yearly, 100m      |   L2_LCC_A |
 | Reference Evapotranspiration      | Monthly, 20km      |   L2_RET_M |
 
-#### 2.3.2. Other Global data
+#### 2.3.2. Other data
 
 | Data layers       | Resolution           | Sources  |
 | ------------- |:-------------:| -----:|

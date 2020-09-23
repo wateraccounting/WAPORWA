@@ -1,0 +1,19 @@
+name: waporwa
+channels:
+  - defaults
+dependencies: 
+  - dask=2.27.* 
+  - gdal=2.3.*
+  - matplotlib=3.3.* 
+  - netcdf4=1.4.*
+  - notebook=6.1.1=py37_0
+  - numpy=1.19.* 
+  - pandas=1.1.* 
+  - pip=20.1.1=py37_1
+  - pyshp=2.1.* 
+  - python=3.7.*
+  - shapely=1.6.* 
+  - tqdm=4.49.* 
+  - xarray=0.16.*  
+  - pip:
+    - geopy==2.0.*
