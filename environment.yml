@@ -14,6 +14,7 @@ dependencies:
   - python=3.7.*
   - shapely=1.6.* 
   - tqdm=4.49.* 
-  - xarray=0.16.*  
+  - xarray=0.16.*
+  - requests=2.24.*
   - pip:
     - geopy==2.0.*

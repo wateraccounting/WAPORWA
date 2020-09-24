@@ -56,6 +56,7 @@ For more recent softwares developed by Water Accounting group at IHE-DELFT Insti
   - tqdm=4.49.* 
   - xarray=0.16.*  
   - geopy==2.0.*
+  - requests=2.24.*
 
 #### Recommended steps to set up python environment in Anaconda prompt
 
