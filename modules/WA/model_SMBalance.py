@@ -231,6 +231,7 @@ def run_SMBalance(MAIN_FOLDER,p_in,e_in,i_in,nrd_in,lu_in,smsat_file,
     nRD,_=open_nc(nrd_in,timechunk=tchunk,chunksize=chunk)
     LU,_=open_nc(lu_in,timechunk=tchunk,chunksize=chunk)
     thetasat,_=open_nc(smsat_file,timechunk=tchunk,chunksize=chunk)
+    print(thetasat)
  
     ### convert nRD = 0 to 1
     nRD = nRD.where(nRD!=0,1)
@@ -288,6 +289,10 @@ def run_SMBalance(MAIN_FOLDER,p_in,e_in,i_in,nrd_in,lu_in,smsat_file,
     #        overflow = SM-SMmax # we don't use overflow at the moment
             SM=SM.where(SM<SMmax, SMmax)
     #        SRO=SRO+overflow.where(overflow>0, SRO)
+            time_da=P.time.data
+            print(ETincr)        
+            ETincr['time']=time_da
+            ETrain['time']=time_da
           
             
     

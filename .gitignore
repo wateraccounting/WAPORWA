@@ -127,3 +127,8 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+data/Global
+data/Litani
+data/Global.rar
+data/Litani.rar
