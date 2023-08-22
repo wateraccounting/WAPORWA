@@ -1,9 +1,6 @@
 # Global Input data can be downloaded from
 
-ftp://ftp.wateraccounting.unesco-ihe.org/WaterAccounting_Guest/Github_data/WAPORWA/Global.rar
-
-- Username: wateraccountingguest
-- Password: W@t3r@ccounting
+[Global.rar](https://surfdrive.surf.nl/files/index.php/s/OiiDupNxcqnfFc5)
 
 # This dataset includes:
 
