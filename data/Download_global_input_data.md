@@ -1,6 +1,6 @@
 # Global Input data can be downloaded from
 
-[ftp://ftp.wateraccounting.unesco-ihe.org/WaterAccounting_Guest/Github_data/WAPORWA/Global.rar](https://surfdrive.surf.nl/files/index.php/s/OiiDupNxcqnfFc5)
+[Global.rar](https://surfdrive.surf.nl/files/index.php/s/OiiDupNxcqnfFc5)
 
 # This dataset includes:
 
