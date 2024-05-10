@@ -1,5 +1,10 @@
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3980562.svg)](https://doi.org/10.5281/zenodo.3980562)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.0-4baaaa.svg)](https://www.contributor-covenant.org/version/2/0/code_of_conduct/code_of_conduct.md)
+<html>
+  <head>
+    <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+  </head>
+</html>
 
 # WaPOR-based Water Accounting 
 ![](./img/README/1_banner.jpg)
@@ -23,6 +28,10 @@ This repository contains ipython notebooks, python scripts for the rapid Water A
 
 http://www.fao.org/in-action/remote-sensing-for-water-productivity/overview/about-the-programme/en/
 
+The original code is archived as the [v.0.0.2 release](https://github.com/wateraccounting/WAPORWA/releases/tag/0.0.2)
+Required citation: IHE Delft. (2020). wateraccounting/WAPORWA: WaPOR-based Water Accounting v.0.0.2 (0.0.2). Zenodo. https://doi.org/10.5281/zenodo.3980588
+
+The current master branch on this repository is open for modification and contribution from community under the **Creative Commons Attribution Share Alike 4.0 International licence**.
 
 ## 2. Installation
 
