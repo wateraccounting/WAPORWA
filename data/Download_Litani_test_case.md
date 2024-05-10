@@ -1,9 +1,6 @@
 # Litani Test Case data can be downloaded from
 
-ftp://ftp.wateraccounting.unesco-ihe.org/WaterAccounting_Guest/Github_data/WAPORWA/Litani.rar
-
-- Username: wateraccountingguest
-- Password: W@t3r@ccounting
+[Litani.rar](https://surfdrive.surf.nl/files/index.php/s/cGTan8zmqxTrjTL)
 
 # This dataset includes example data for the Litani basin case:
 
