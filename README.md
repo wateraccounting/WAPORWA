@@ -24,7 +24,7 @@ With contributions from:
 
 ## 1. About
 
-This repository contains ipython notebooks, python scripts for the rapid Water Accounting analysis using WaPOR data in 5 river basins: Litani, Jordan, Awash, Niger, Nile. This work is done by the Water Accounting group at IHE-DELFT Institute for Water Education as a part of the WaPOR programme of The Food and Agriculture Organization of the United Nations (FAO).
+This repository contains ipython notebooks, python scripts for the rapid Water Accounting analysis using WaPOR data in 5 river basins: Litani, Jordan, Awash, Niger, Nile. This work is done by the Water Accounting group at IHE-DELFT Institute for Water Education as a part of the WaPOR programme of The Food and Agriculture Organization of the United Nations (FAO). The data used in these water accounting studies were acquired from WaPOR version 2 database using WaPOR API version 2, which is no longer maintained since December 2023 (https://wapor.apps.fao.org/profile/deprecated). For more updates on how to access the new version, please visit https://www.fao.org/in-action/remote-sensing-for-water-productivity/wapor-data-access/en 
 
 http://www.fao.org/in-action/remote-sensing-for-water-productivity/overview/about-the-programme/en/
 
